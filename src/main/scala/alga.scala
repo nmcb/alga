@@ -52,6 +52,15 @@ object Graph:
   def empty[A]: Graph[A] =
     Empty.asInstanceOf[Graph[A]]
 
+  def vertex[A](a: A): Graph[A] =
+    Vertex(a)
+
+  def overlay[A](lhs: Graph[A], rhs: Graph[A]): Graph[A] =
+    Overlay(lhs, rhs)
+
+  def connect[A](lhs: Graph[A], rhs: Graph[A]): Graph[A] =
+    Connect(lhs, rhs)
+
   extension (i: Int) def node: Graph[Int] =
     Vertex(i)
 
