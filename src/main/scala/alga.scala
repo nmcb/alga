@@ -63,9 +63,3 @@ object Graph:
 
   extension (i: Int) def node: Graph[Int] =
     Vertex(i)
-
-@main def run =
-  import Graph.*
-  val lhs = (1.node + 2.node) + 3.node
-  val rhs = 1.node + (2.node + 3.node)
-  assert(lhs === rhs)
