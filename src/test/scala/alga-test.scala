@@ -46,7 +46,7 @@ object GraphProperties
   }
 
   property("connect has empty as left-identity") = forAll(graphGen) {
-      (a: G) => Graph.empty * a === a
+    (a: G) => Graph.empty * a === a
   }
 
   property("connect has empty as right-identity") = forAll(graphGen) {
