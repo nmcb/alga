@@ -20,7 +20,7 @@ object GraphProperties
     for { a <- graphGen ; b <- graphGen ; c <- graphGen } yield (a, b, c)
 
   given emptyGen: Gen[G] =
-    const(Graph.empty[Int])
+    const(Graph.empty)
 
   given vertexGen: Gen[G] =
     posNum[Int].map(Graph.vertex)
