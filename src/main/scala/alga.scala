@@ -20,10 +20,10 @@ enum Graph[A]:
       case Connect(l, r) => c(l.foldg(e, v, o, c), r.foldg(e, v, o, c))
 
   def map[B](f: A => B): Graph[B] =
-    foldg(Graph.empty, f.andThen(Vertex[B]), Overlay[B], Connect[B])
+    foldg(Graph.empty, f.andThen(Vertex.apply), Overlay.apply, Connect.apply)
 
   def flatMap[B](f: A => Graph[B]): Graph[B] =
-    foldg(Graph.empty, f, Overlay[B], Connect[B])
+    foldg(Graph.empty, f, Overlay.apply, Connect.apply)
 
   def isEmpty: Boolean =
     foldg(true, _ => false, _ && _, _ && _)
@@ -61,5 +61,5 @@ object Graph:
   def connect[A](lhs: Graph[A], rhs: Graph[A]): Graph[A] =
     Connect(lhs, rhs)
 
-  extension (i: Int) def node: Graph[Int] =
-    Vertex(i)
+  extension [A] (any: A) def graph: Graph[A] =
+    vertex(any)
