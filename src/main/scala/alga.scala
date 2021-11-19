@@ -43,8 +43,6 @@ enum Graph[A]:
 
 object Graph:
 
-  import fpa.equality._
-
   def empty[A]: Graph[A] =
     Empty.asInstanceOf[Graph[A]]
 
@@ -57,12 +55,9 @@ object Graph:
   def connect[A](lhs: Graph[A], rhs: Graph[A]): Graph[A] =
     Connect(lhs, rhs)
     
+  import fpa.equality._
+
   given equality[A]: Eq[Graph[A]] =
     new Eq[Graph[A]]:
       def normalized(l: Graph[A])(r: => Graph[A]): Boolean =
         l.vertexSet == r.vertexSet && l.edgeSet == r.edgeSet
-
-  extension [A] (any: A) def graph: Graph[A] =
-    vertex(any)
-
-
