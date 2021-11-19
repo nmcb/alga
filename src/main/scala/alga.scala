@@ -59,5 +59,5 @@ object Graph:
 
   given equality[A]: Eq[Graph[A]] =
     new Eq[Graph[A]]:
-      def normalized(l: Graph[A])(r: => Graph[A]): Boolean =
+      def normalized(l: Graph[A])(r: Graph[A]): Boolean =
         l.vertexSet == r.vertexSet && l.edgeSet == r.edgeSet
