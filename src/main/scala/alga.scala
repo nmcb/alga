@@ -41,12 +41,6 @@ enum Graph[A]:
       case Overlay(l, r) => l.edgeSet ++ r.edgeSet
       case Connect(l, r) => l.edgeSet ++ r.edgeSet ++ l.vertexSet.flatMap(a => r.vertexSet.map(b => (a, b)))
 
-  // def ===(that: Graph[A]): Boolean =
-  //   this.vertexSet == that.vertexSet && this.edgeSet == that.edgeSet
-
-  // def =/=(that: Graph[A]): Boolean =
-  //   ! ===(that)
-
 object Graph:
 
   import fpa.equality._
