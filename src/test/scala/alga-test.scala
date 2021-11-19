@@ -1,6 +1,7 @@
 package alga
 
 import org.scalacheck.*
+import fpa.equality.Eq
 
 object GraphProperties
   extends Properties("Graph"):
@@ -32,6 +33,8 @@ object GraphProperties
     tuple2GraphGen.map(Graph.connect)
 
   /* algebraic properties of alga.Graph */
+
+  import fpa.equality._
 
   property("overlay is commutative") = forAll(tuple2GraphGen) {
     (a: G, b: G) => a + b === (b + a)

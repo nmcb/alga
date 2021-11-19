@@ -41,13 +41,15 @@ enum Graph[A]:
       case Overlay(l, r) => l.edgeSet ++ r.edgeSet
       case Connect(l, r) => l.edgeSet ++ r.edgeSet ++ l.vertexSet.flatMap(a => r.vertexSet.map(b => (a, b)))
 
-  def ===(that: Graph[A]): Boolean =
-    this.vertexSet == that.vertexSet && this.edgeSet == that.edgeSet
+  // def ===(that: Graph[A]): Boolean =
+  //   this.vertexSet == that.vertexSet && this.edgeSet == that.edgeSet
 
-  def =/=(that: Graph[A]): Boolean =
-    ! ===(that)
+  // def =/=(that: Graph[A]): Boolean =
+  //   ! ===(that)
 
 object Graph:
+
+  import fpa.equality._
 
   def empty[A]: Graph[A] =
     Empty.asInstanceOf[Graph[A]]
@@ -60,6 +62,13 @@ object Graph:
 
   def connect[A](lhs: Graph[A], rhs: Graph[A]): Graph[A] =
     Connect(lhs, rhs)
+    
+  given equality[A]: Eq[Graph[A]] =
+    new Eq[Graph[A]]:
+      def normalized(l: Graph[A])(r: => Graph[A]): Boolean =
+        l.vertexSet == r.vertexSet && l.edgeSet == r.edgeSet
 
   extension [A] (any: A) def graph: Graph[A] =
     vertex(any)
+
+
