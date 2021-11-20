@@ -61,3 +61,16 @@ object Graph:
     new Eq[Graph[A]]:
       def normalized(l: Graph[A])(r: Graph[A]): Boolean =
         l.vertexSet == r.vertexSet && l.edgeSet == r.edgeSet
+
+  import fpa.numeric._
+
+  given numeric[A](using num: Num[A]): Num[Graph[A]] =
+    new Num[Graph[A]]:
+      def plus(l: Graph[A])(r: Graph[A]): Graph[A] =
+        Overlay(l, r)
+      def star(l: Graph[A])(r: Graph[A]): Graph[A] =
+        Connect(l, r)
+      def pzero: Graph[A] =
+        Graph.empty
+      def szero: Graph[A] =
+        Vertex(num.szero)

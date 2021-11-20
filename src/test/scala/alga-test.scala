@@ -67,3 +67,15 @@ object GraphProperties
   property("connect decomposes") = forAll(tuple3GraphGen) {
     (a: G, b: G, c: G) => a * b * c === ((a * b) + (a * c) + (b * c))
   }
+
+  /* numeric properties of alga.Graph */
+
+  import fpa.numeric._
+
+  property("overlay is additional") = forAll(tuple2GraphGen) {
+    (a: G, b: G) => (a + b) === (a |+| b)
+  }
+
+  property("connect is multiplicative") = forAll(tuple2GraphGen) {
+    (a: G, b: G) => (a * b) === (a |*| b)
+  }
