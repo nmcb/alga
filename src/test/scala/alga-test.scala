@@ -73,9 +73,17 @@ object GraphProperties
   import fpa.numeric._
 
   property("overlay is additional") = forAll(tuple2GraphGen) {
-    (a: G, b: G) => (a + b) === (a |+| b)
+    (a: G, b: G) =>
+      val canBeAdded        = (a + b) === (a |+| b)
+      val hasEmptyLeftUnit  = (Graph.empty + a) === (ε[G] |+| a)
+      val hasEmptyRightUnit = (a + Graph.empty) === (a |+| ε[G])
+      canBeAdded && hasEmptyLeftUnit && hasEmptyLeftUnit
   }
 
   property("connect is multiplicative") = forAll(tuple2GraphGen) {
-    (a: G, b: G) => (a * b) === (a |*| b)
+    (a: G, b: G) => 
+      val canBeMultiplied    = (a * b) === (a |*| b)
+      val hasVertexLeftUnit  = (Graph.vertex(1) * a) === (ú[G] |*| a)
+      val hasVertexRightUnit = (a * Graph.vertex(1)) === (a |*| ú[G])
+      canBeMultiplied && hasVertexLeftUnit && hasVertexRightUnit
   }
