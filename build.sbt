@@ -6,6 +6,6 @@ lazy val alga = project
     scalaVersion := "3.2.0",
 
     libraryDependencies ++= Seq(
-      "org.scalacheck" %% "scalacheck" % "1.15.4" % "test"
+      "org.scalacheck" %% "scalacheck" % "1.17.0" % "test"
     )
   )
