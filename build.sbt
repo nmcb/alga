@@ -3,7 +3,7 @@ lazy val alga = project
   .settings(
     name         := "alga",
     version      := "0.1.0",
-    scalaVersion := "3.8.1",
+    scalaVersion := "3.8.2",
 
     libraryDependencies ++= Seq(
       "org.scalacheck" %% "scalacheck" % "1.19.0" % "test"
